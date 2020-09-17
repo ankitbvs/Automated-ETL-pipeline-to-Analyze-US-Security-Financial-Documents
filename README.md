@@ -9,7 +9,7 @@
 * [Technologies](#technologies)
 * [Type of Data](#type-of-data)
 * [Data Pre-processing](#data-pre-processing)
-* [Algorithms Implemented](#algorithms-implemented)
+* [Tools Implemented](#algorithms-implemented)
 * [Steps Involved](#steps-involved)
 * [Evaluation Metrics](#evaluation-metrics)
 * [Results and Conclusion](#results-and-conclusion)
@@ -47,34 +47,34 @@ https://www.sec.gov/Archives/edgar/data/3662/
 
 ### Steps Involved
 
-## Technique 1 - K-Means(Context Based Filtering)
-* Based on the reviews obtained above we have created its TF-IDF using TfidfVectorizer function.
-* Since we are handling huge amount of data with our data frame having 5,074,160 reviews we have done rest of the operations in Apache Spark for efficient and faster handling of big data. We have created a Spark data frame from the pandas reviews data frame
-* Next we have created a data cleaning pipeline using the Pipeline function in which we have cleaned the spark data frame by tokenizing the reviews, removing stop words, calculated the term frequencies (TF) and IDF for the tokenized words.
-* We have clustered the products. So now whenever a new input keyword has been searched, it would pass through pipeline for cluster assignment. Products under the respective cluster are up for recommendation.
+STEP 1 : Loop through the file_rec. In every iteration we fetch url data from the SECFNAME column in the file_rec dataframe.
 
-## Technique 2 - ALS Collaborative Filtering Algorithm
-* We have obtained a Spark data frame containing item id, user id and ratings
-* Alternating Least Squares algorithm requires the inputs to be numerical and integers with value less than 2,147,483,647 (32-bit limit). So we have created new index for      item_id and user_id using StringIndexer with definitive mapped values for each user and item.
-* We have split the data into (80%) training and (20%) testing. We have used ALS (Alternating Least Squares) algorithm for training the data.
-* We have evaluated the model on the test data. We have got RMSE value of 1.134. We thought that it might be over fitting the data so we implemented 5-fold Cross Validation in the next step.
-* After implementing 5-fold ALS Cross Validation and evaluating on the test data we have obtained a RMSE value of 0.8345 which showed an improvement from the previous time.
-* Finally, using our model we are obtaining TOP 10 recommendations for all the users in our data frame.
+STEP 2 : In every iteration, We read the data from the HTML webpage using the URL Link 
+
+STEP 3 : After reading the data from the HTML page, we remove the HTML components from it and get clean text data
+         We concatenate all of that text data into a single string. 
+         This has been done to avoid another loop inside it, thus increasing speed of operation
+         
+STEP 4 : Once the data is ready using the above operations, we then go for fetching specific sections data using the function fetch_sections_data()
+
+STEP 5 : HOW IS THE SECTIONS DATA FETCHED ?
+         The sections data is fetched using a very simple approach. For example: if we want to extract "RISK FACTORS" section data, this sections data
+         would be present in the Table of Contents and in the main section where the Actual topic would be present.
+         Since we would be needing only the Actual Topic data instead of the heading name in Table of contents, I am searching for the number of occurences
+         of "RISK FACTORS"(UPPERCASE) in my data. I am looking only for UPPERCASE because the part where Actual data is present starts with "RISK FACTORS" name
+         in the upper case only. So once I find the occurence of RISK FACTORS in my data, I slice my data to start it from that position. But where to end it now?
+         To knoww the part where I have to end it is decided by the "ITEM"(UPPERCASE) name. Each section corresponds to one ITEM number. So RISK FACTORS corresponds to ITEM 2,
+         its next topic should be ITEM 3. So I am looking for the position of ITEM in my sliced data. The part where ITEM begins would be my end point.
+         But what if Table of contents also contains "RISK FACTORS" name in Upper case?
+         Well for this case, I am removing the Table of Contents from my data.
+         So, this would ensure that whatever data I am fetching is completely related to the section I am looking for.
+         
+STEP 6 : Once all the 3 sections data has been fetched, we perform all the required calculations on it.
   
 ### Evaluation Metrics  
-RMSE (Root Mean Square Error) 
+Accuracy
 
 ### Results and Conclusion
-By analyzing our dataset through various tools like R, Python, Pyspark we developed a product recommendation system based on the customer’s interest. We have used 2 different models for this purpose i.e. KNN and ALS Collaborative Filtering.
-
-For the KNN which does context based filtering, we have tested our model with a test data which shows products under their respective cluster. It shows the products which are closely related to Kit Kat.
-
-![alt text](rec_res1.JPG)
-
-On implementing the ALS Collaborative Filtering Algorithm, we have used ALS model in which we have obtained RMSE value of 1.134.
-
-![alt text](rec_res2.JPG)
-
-On using 5-fold cross validation and evaluating on the test data the RMSE value showed an improvement. We obtained RMSE value of 0.8345.
+By analyzing our dataset through various tools like Pandas, NLTK and BeautifulSoup in Python, we developed a data pipeline mechanism to automatically extract the Financila texts from the US Security and Exchnage commission and save the output in a .CSV file. 
 
 ![alt text](rec_res3.JPG)
