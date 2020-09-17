@@ -1,4 +1,4 @@
-# Built-ETL-pipeline-to-Analyze-US-Security-Financial-Documents
+# Automated-ETL-pipeline-to-Analyze-US-Security-Financial-Documents
 
 ![alt text](ussec.PNG)
 
