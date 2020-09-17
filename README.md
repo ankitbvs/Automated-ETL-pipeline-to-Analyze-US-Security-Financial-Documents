@@ -20,6 +20,7 @@ Objective of this assignment is to extract some sections (which are mentioned be
 Please add https://www.sec.gov/Archives/ to every cells of column F (cik_list.xlsx) to access link to the financial report. 
 
 Example: Row 2, column F contains edgar/data/3662/0000950170-98-000413.txt
+
 Add https://www.sec.gov/Archives/ to form financial report link i.e. 
 https://www.sec.gov/Archives/edgar/data/3662/0000950170-98-000413.txt 
 
