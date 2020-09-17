@@ -77,4 +77,4 @@ Accuracy
 ### Results and Conclusion
 By analyzing our dataset through various tools like Pandas, NLTK and BeautifulSoup in Python, we developed a data pipeline mechanism to automatically extract the Financila texts from the US Security and Exchnage commission and save the output in a .CSV file. 
 
-![alt text](rec_res3.JPG)
+![alt text](ussecoutput.PNG)
