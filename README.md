@@ -1,6 +1,6 @@
 # Financial-Texts-Analysis-In-US-Securities-and-Exchange-Commision-Analysis-index.md
 
-![alt text](featured.PNG)
+![alt text](ussec.PNG)
 
 ### Table of contents
 * [Introduction](#introduction)
