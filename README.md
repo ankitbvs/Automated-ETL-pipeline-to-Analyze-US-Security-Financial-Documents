@@ -15,31 +15,35 @@
 * [Results and Conclusion](#results-and-conclusion)
 
 ### Introduction
-The objective of the project is to develop a product recommendation system based on the customer’s interest. The purchase history is retrieved to capture customer’s inclination for a set of products available in the store. The data extraction, exploration, transformation and analysis would be achieved through Apache Spark system. Based on the analysis, the system would recommend products for customers who would most likely be inclined to buy a set of products along with the current product picked up for check out. This recommendation system is intended to help e-commerce web sites to service customers with appropriate recommendations at the right time with an attractive price tag.
+Objective of this assignment is to extract some sections (which are mentioned below) from SEC / EDGAR financial reports and perform text analysis to compute variables those are explained below. Link to SEC / EDGAR financial reports are given in excel spreadsheet “cik_list.xlsx”. 
+
+Please add https://www.sec.gov/Archives/ to every cells of column F (cik_list.xlsx) to access link to the financial report. 
+Example: Row 2, column F contains edgar/data/3662/0000950170-98-000413.txt
+Add https://www.sec.gov/Archives/ to form financial report link i.e. 
+https://www.sec.gov/Archives/edgar/data/3662/0000950170-98-000413.txt 
 
 ### Problem Statement
-* Build a product recommendation system based on the customer’s interest.
+* Build data pipeline to extract the Financial Texts from the US Security and Exchange Commissions website and perform NLP operations on the text. 
 
 ### Data Source
-* The Dataset was obtained from the website: https://nijianmo.github.io/amazon/index.html
-  The data set is a part of Amazon review dataset released in 2014, provided by UCSD.
+* The Dataset was obtained from the website US Security and Exchange Commisions Website: 
+https://www.sec.gov/Archives/edgar/data/3662/
 
 ### Technologies
 * Python 3.6.7
-* PySpark 3.0.0
 
 ### Type of Data
-* The data set contains data for 287,209 products with 5,074,160 reviews and ratings by 1, 57,386 unique users.
+* The data set consists of 150 records which has links provided to the US Security and Exchange Commissions Financial documents.
 * The data does not contain any null values
-* Train : 80%
-* Test  : 20%
 
 ### Data Pre-processing
 * Tokenizing, removal of stop words and stemming was done for textual data
 
-### Algorithms Implemented
-* K-Means (Context Based Filtering)
-* ALS Collaborative Filtering Algorithm
+### Tools Implemented
+* Vedar Rule-based model
+* Pandas
+* NLTK
+* BeautifulSoup
 
 ### Steps Involved
 
